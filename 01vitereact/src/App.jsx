@@ -1,10 +1,12 @@
 import Chai from "./chai"
 
 function App() {
+const userName = "Chai aur Codee !" // to use this variable in the below return block's one of the element we've to use "expression" syntax which is "{}" also it is called 'Evaluated Expression' as we put the already evaluated expression in the element so no need to evaluate the expression again.
+
   return (
     <>
    <Chai />
-    <h1>Hello World !</h1>
+      <h1>Hello World ! with {userName}</h1> {/*Boom ! it worked*/}
     <h2> running this in one element of App function`</h2>
     </>
   )
