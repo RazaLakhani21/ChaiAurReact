@@ -1,10 +1,16 @@
 import { useCallback, useRef, useState, useEffect } from "react";
+import './App.css'; // Make sure to import the CSS file
 
 function App() {
   const [length, setLength] = useState(8);
   const [numAllowed, setNumAllowed] = useState(false);
   const [specAllowed, setSpecAllowed] = useState(false);
   const [password, setPassword] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
+
+  const alertCopy = () => {
+    alert("Copied !")
+  }
 
   //useRef Hook
   const passwordRef = useRef(null)
@@ -27,6 +33,12 @@ function App() {
     passwordRef.current?.select()
     passwordRef.current?.setSelectionRange(0, 9) //will select the value under that given range
     window.navigator.clipboard.writeText(password)
+    .then(() => {
+      // Show alert if copy successful
+      setIsClicked(true);
+      alert('Password copied to clipboard!');
+      setTimeout(() => setIsClicked(false), 2000);
+    })
   }, [password])
 
   useEffect(()=>{passwordGenerator()}, [length, numAllowed, specAllowed, passwordGenerator])
@@ -48,7 +60,7 @@ function App() {
             ref={passwordRef}
           />
           <button
-            className="w-20 outline-none text-white font-bold bg-blue-700 px-3 py-0.5 shrink-0"
+            className={`button ${isClicked ? 'button-clicked' : 'button-default'}`}
             onClick={copyPasswordToClipboard}
           >
             Copy
